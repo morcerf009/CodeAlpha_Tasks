@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# YOLO/Ultralytics
+yolov8n.pt
+runs/
+*.log
+
+# IDEs
+.vscode/
+.idea/

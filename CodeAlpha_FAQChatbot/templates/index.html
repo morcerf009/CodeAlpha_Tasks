@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FAQ Chatbot</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #chat-container {
+            width: 450px;
+            height: 600px;
+            background-color: #fff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-header {
+            background-color: #764ba2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat-window {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fdfdfd;
+        }
+
+        .message-container {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 18px 18px 0 18px;
+            max-width: 75%;
+            word-wrap: break-word;
+            margin-left: auto;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f0f0;
+            color: #333;
+            padding: 10px 18px;
+            border-radius: 18px 18px 18px 0;
+            max-width: 75%;
+            word-wrap: break-word;
+            margin-right: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #suggestions {
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+        }
+
+        .suggestion-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            background-color: #e9ecef;
+            border-color: #764ba2;
+            color: #764ba2;
+        }
+
+        #input-area {
+            display: flex;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        #textInput {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #sendBtn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #sendBtn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id="chat-container">
+        <div id="chat-header">FAQ Smart Assistant</div>
+        <div id="chat-window">
+            <div class="message-container">
+                <div class="bot-message">Hello! I'm your FAQ assistant. How can I help you today?</div>
+            </div>
+        </div>
+        <div id="suggestions">
+            <button class="suggestion-btn" onclick="sendSuggestion('Return policy')">Return policy</button>
+            <button class="suggestion-btn" onclick="sendSuggestion('Payment methods')">Payment methods</button>
+            <button class="suggestion-btn" onclick="sendSuggestion('Track order')">Track order</button>
+        </div>
+        <div id="input-area">
+            <input id="textInput" type="text" name="msg" placeholder="Type your message here...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendSuggestion(text) {
+            $("#textInput").val(text);
+            getBotResponse();
+        }
+
+        function getBotResponse() {
+            var rawText = $("#textInput").val();
+            if (rawText.trim() === "") return;
+
+            var userHtml = '<div class="message-container"><div class="user-message">' + rawText + '</div></div>';
+            $("#textInput").val("");
+            $("#chat-window").append(userHtml);
+
+            // Scroll to bottom
+            $("#chat-window").scrollTop($("#chat-window")[0].scrollHeight);
+
+            $.get("/get", { msg: rawText }).done(function (data) {
+                var botHtml = '<div class="message-container"><div class="bot-message">' + data + '</div></div>';
+                $("#chat-window").append(botHtml);
+                // Scroll to bottom
+                $("#chat-window").scrollTop($("#chat-window")[0].scrollHeight);
+            });
+        }
+
+        $("#textInput").keypress(function (e) {
+            if (e.which == 13) {
+                getBotResponse();
+            }
+        });
+
+        $("#sendBtn").click(function () {
+            getBotResponse();
+        });
+    </script>
+
+</body>
+
+</html>

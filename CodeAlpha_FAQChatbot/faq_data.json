@@ -1,0 +1,58 @@
+[
+    {
+        "question": "hi hello hey",
+        "answer": "Hello! I'm your FAQ assistant. How can I help you today?"
+    },
+    {
+        "question": "What is your return policy?",
+        "answer": "You can return products within 7 days of delivery."
+    },
+    {
+        "question": "How long does delivery take?",
+        "answer": "Delivery usually takes 3-5 business days."
+    },
+    {
+        "question": "Do you offer international shipping?",
+        "answer": "Yes, we ship worldwide."
+    },
+    {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept Visa, MasterCard, PayPal, and Apple Pay."
+    },
+    {
+        "question": "How can I track my order?",
+        "answer": "You can track your order using the tracking number sent to your email."
+    },
+    {
+        "question": "Can I cancel my order?",
+        "answer": "Yes, you can cancel your order within 24 hours of placing it."
+    },
+    {
+        "question": "How do I reset my password?",
+        "answer": "Click on 'Forgot Password' on the login page and follow the instructions."
+    },
+    {
+        "question": "How can I contact customer support?",
+        "answer": "You can support us via email at support@example.com or call us at 1-800-123-4567."
+    },
+    {
+        "question": "What is the warranty period for your products?",
+        "answer": "All our products come with a 1-year manufacturer warranty."
+    },
+    {
+        "question": "How do I create an account?",
+        "answer": "Click on 'Sign Up' at the top right corner and fill in your details."
+    },
+    {
+        "question": "Can I change my shipping address?",
+        "answer": "You can change your shipping address in your account settings before the order is shipped."
+    },
+    {
+        "question": "Where are you located?",
+        "answer": "We are an online-only store with warehouses in New York and California."
+    },
+    {
+        "question": "Do you offer any discounts?",
+        "answer": "Yes, subscribe to our newsletter to get 10% off your first order."
+    }
+]
